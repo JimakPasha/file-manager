@@ -2,7 +2,7 @@ import { cpus, userInfo, EOL } from 'os';
 
 import { displayCurrentDirectory, displayErrorOperation, displayInvalidInput } from '../libs/index.js'
 
-export const os = ([arg]) => {
+export const os = async ([arg]) => {
   try {
     switch(arg) {
       case '--EOL':
@@ -32,4 +32,4 @@ export const os = ([arg]) => {
   } catch {
     displayErrorOperation();
   }
-} 
+}
