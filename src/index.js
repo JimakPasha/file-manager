@@ -2,7 +2,7 @@ import { homedir } from 'os';
 import readline from 'readline';
 
 import { parseArgumens, displayGreetings, displayCurrentDirectory } from './libs/index.js'
-import { up, cd, ls, cat, add, rn, rm } from './handlers/index.js'
+import { up, cd, ls, cat, add, rn, cp, mv, rm } from './handlers/index.js'
 
 process.chdir(homedir());
 
@@ -42,6 +42,12 @@ const parseInput = async (input) => {
       break;
     case 'rn':
       await rn(arg);
+      break;
+    case 'cp':
+      await cp(arg);
+      break;
+    case 'mv':
+      await mv(arg);
       break;
     case 'rm':
       await rm(arg);
