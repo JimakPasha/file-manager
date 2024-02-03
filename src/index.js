@@ -1,8 +1,8 @@
 import { homedir } from 'os';
 import readline from 'readline';
 
-import { parseArgumens, displayGreetings, displayCurrentDirectory } from './libs/index.js'
-import { up, cd, ls, cat, add, rn, cp, mv, rm } from './handlers/index.js'
+import { parseArgumens, displayGreetings, displayCurrentDirectory, displayInvalidInput } from './libs/index.js'
+import { up, cd, ls, cat, add, rn, cp, mv, rm, os } from './handlers/index.js'
 
 process.chdir(homedir());
 
@@ -52,8 +52,11 @@ const parseInput = async (input) => {
     case 'rm':
       await rm(arg);
       break;
+    case 'os':
+      await os(arg);
+      break;
     default:
-      console.log(`Invalid input`);
+      displayInvalidInput();
   }
 }
 
