@@ -19,6 +19,8 @@ import {
   rm,
   os,
   hash,
+  compress,
+  decompress,
 } from './handlers/index.js'
 
 process.chdir(homedir());
@@ -36,7 +38,7 @@ const rl = readline.createInterface({
 });
 
 const parseInput = async (input) => {
-  let [command, ...arg] =  input.trim().split(' ');
+  let [command, ...args] =  input.trim().split(' ');
 
   switch (command) {
     case '.exit':
@@ -46,34 +48,40 @@ const parseInput = async (input) => {
       await up();
       break;
     case 'cd':
-      await cd(arg);
+      await cd(args);
       break;
     case 'ls':
       await ls();
       break;
     case 'cat':
-      await cat(arg);
+      await cat(args);
       break;
     case 'add':
-      await add(arg);
+      await add(args);
       break;
     case 'rn':
-      await rn(arg);
+      await rn(args);
       break;
     case 'cp':
-      await cp(arg);
+      await cp(args);
       break;
     case 'mv':
-      await mv(arg);
+      await mv(args);
       break;
     case 'rm':
-      await rm(arg);
+      await rm(args);
       break;
     case 'os':
-      await os(arg);
+      await os(args);
       break;
     case 'hash':
-      await hash(arg);
+      await hash(args);
+      break;
+    case 'compress':
+      await compress(args);
+      break;
+    case 'decompress':
+      await decompress(args);
       break;
     default:
       displayInvalidInput();
@@ -87,34 +95,3 @@ rl
     console.log(`Thank you for using File Manager, ${username}, goodbye!`);
     process.exit();
   });
-
-
-
-// let username = '';
-
-// process.on('beforeExit', () => {
-//   if (username) {
-//     console.log(`Thank you for using File Manager, ${username}, goodbye!`);
-//   }
-// });
-
-// process.on('SIGINT', () => {
-//   process.exit();
-// });
-
-// const args = process.argv.slice(2);
-// const usernameArg = args.find(arg => arg.startsWith('--username='));
-
-// if (usernameArg) {
-//   username = usernameArg.split('=')[1];
-//   console.log(`Welcome to the File Manager, ${username}!`);
-// } else {
-//   console.log('Welcome to the File Manager!');
-// }
-
-// process.stdin.on('data', input => {
-//   const userInput = input.toString().trim();
-//   if (userInput === '.exit') {
-//     process.exit();
-//   }
-// });
